@@ -11,11 +11,14 @@ public class PlayerLook : MonoBehaviour
     [SerializeField]
     private Transform playerBody;
     private float yLookClamp;
+   
 
     private void Awake()
     {
         LockCursor();
         yLookClamp = 0.0f;
+
+        
     }
 
     private void LockCursor()
@@ -27,7 +30,9 @@ public class PlayerLook : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
+        gameObject.transform.position = playerBody.transform.position;
         CameraRotation();
+       
     }
 
 
@@ -50,15 +55,24 @@ public class PlayerLook : MonoBehaviour
             mouseY = 0;
             ClampYLookToValue(90);
         }
+        //ClampZLookToValue(0);
 
         transform.Rotate(Vector3.left * mouseY);
-        playerBody.Rotate(Vector3.up * mouseX);
+        playerBody.gameObject.transform.Rotate(Vector3.up * mouseX);
+       // gameObject.transform.Rotate(Vector3.up * mouseX); //Separated mouse and player rotation to avoid trouble with grav rotation
     }
 
     private void ClampYLookToValue(float clampValue)
     {
         Vector3 eulerRotationCamera = transform.eulerAngles;
         eulerRotationCamera.x = clampValue;
+        transform.eulerAngles = eulerRotationCamera;
+    }
+
+    private void ClampZLookToValue(float clampValue)
+    {
+        Vector3 eulerRotationCamera = transform.eulerAngles;
+        eulerRotationCamera.z = clampValue;
         transform.eulerAngles = eulerRotationCamera;
     }
 }

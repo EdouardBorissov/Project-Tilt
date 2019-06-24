@@ -41,12 +41,13 @@ public class YoinkedPlayerMove : MonoBehaviour
             // Jump
             if (canJump && Input.GetButton("Jump"))
             {
-                playerRigidbody.velocity = new Vector3(velocity.x, CalculateJumpVerticalSpeed(), velocity.z);
+                // playerRigidbody.velocity = new Vector3(velocity.x, CalculateJumpVerticalSpeed(), velocity.z);
+                playerRigidbody.AddRelativeForce(velocity.x, CalculateJumpVerticalSpeed(), velocity.z, ForceMode.Impulse);
             }
         }
 
         // We apply gravity manually for more tuning control
-        playerRigidbody.AddForce(new Vector3(0, -gravity * playerRigidbody.mass, 0));
+        //playerRigidbody.AddForce(new Vector3(0, -gravity * playerRigidbody.mass, 0));
 
         grounded = false;
     }
