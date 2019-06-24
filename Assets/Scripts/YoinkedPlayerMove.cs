@@ -11,6 +11,7 @@ public class YoinkedPlayerMove : MonoBehaviour
     public float jumpHeight = 2.0f;
     private bool grounded = false;
     private Rigidbody playerRigidbody;
+   
 
 
 
@@ -36,7 +37,8 @@ public class YoinkedPlayerMove : MonoBehaviour
             velocityChange.x = Mathf.Clamp(velocityChange.x, -maxVelocityChange, maxVelocityChange);
             velocityChange.z = Mathf.Clamp(velocityChange.z, -maxVelocityChange, maxVelocityChange);
             velocityChange.y = 0;
-            playerRigidbody.AddForce(velocityChange, ForceMode.VelocityChange);
+             playerRigidbody.AddForce(velocityChange, ForceMode.VelocityChange);
+          //  playerRigidbody.velocity = velocityChange;
 
             // Jump
             if (canJump && Input.GetButton("Jump"))
