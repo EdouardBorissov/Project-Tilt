@@ -59,7 +59,6 @@ public class PlayerLook : MonoBehaviour
 
         transform.Rotate(Vector3.left * mouseY);
         playerBody.gameObject.transform.Rotate(Vector3.up * mouseX);
-       // gameObject.transform.Rotate(Vector3.up * mouseX); //Separated mouse and player rotation to avoid trouble with grav rotation
     }
 
     private void ClampYLookToValue(float clampValue)

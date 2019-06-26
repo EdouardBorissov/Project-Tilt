@@ -11,6 +11,7 @@ public class YoinkedPlayerMove : MonoBehaviour
     public float jumpHeight = 2.0f;
     private bool grounded = false;
     private Rigidbody playerRigidbody;
+    private CustomGravity2 playerGravity;
    
 
 
@@ -20,25 +21,57 @@ public class YoinkedPlayerMove : MonoBehaviour
         playerRigidbody = gameObject.GetComponent<Rigidbody>();
         playerRigidbody.freezeRotation = true;
         playerRigidbody.useGravity = false;
+        playerGravity = gameObject.GetComponent<CustomGravity2>();
     }
 
     void FixedUpdate()
     {
         if (grounded)
         {
+            Vector3 targetVelocity = new Vector3(0,0,0);
             // Calculate how fast we should be moving
-            Vector3 targetVelocity = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
+           /* if (playerGravity.gravDirection == CustomGravity2.GravityDirection.Down)
+            {
+                targetVelocity = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
+            }
+            else if (playerGravity.gravDirection == CustomGravity2.GravityDirection.Up)
+            {
+                targetVelocity = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
+            }
+            else if(playerGravity.gravDirection == CustomGravity2.GravityDirection.Left)
+            {
+                targetVelocity = new Vector3(0, Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
+            }
+            else if(playerGravity.gravDirection == CustomGravity2.GravityDirection.Right)
+            {
+                targetVelocity = new Vector3(0, Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
+            }
+            else if(playerGravity.gravDirection == CustomGravity2.GravityDirection.Forward)
+            {
+                targetVelocity = new Vector3(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"), 0);
+            }
+            else if(playerGravity.gravDirection == CustomGravity2.GravityDirection.Back)
+            {
+                targetVelocity = new Vector3(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"), 0);
+            }
+            else
+            {
+                Debug.Log("Custom Gravity has not been set!");
+                targetVelocity = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
+            }*/
+            targetVelocity = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
+
             targetVelocity = transform.TransformDirection(targetVelocity);
             targetVelocity *= speed;
 
             // Apply a force that attempts to reach our target velocity
             Vector3 velocity = playerRigidbody.velocity;
             Vector3 velocityChange = (targetVelocity - velocity);
-            velocityChange.x = Mathf.Clamp(velocityChange.x, -maxVelocityChange, maxVelocityChange);
-            velocityChange.z = Mathf.Clamp(velocityChange.z, -maxVelocityChange, maxVelocityChange);
-            velocityChange.y = 0;
+          //  velocityChange.x = Mathf.Clamp(velocityChange.x, -maxVelocityChange, maxVelocityChange);
+            //velocityChange.z = Mathf.Clamp(velocityChange.z, -maxVelocityChange, maxVelocityChange);
+            //velocityChange.y = 0;
              playerRigidbody.AddForce(velocityChange, ForceMode.VelocityChange);
-          //  playerRigidbody.velocity = velocityChange;
+     
 
             // Jump
             if (canJump && Input.GetButton("Jump"))
