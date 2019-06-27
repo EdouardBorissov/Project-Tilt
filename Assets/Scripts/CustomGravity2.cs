@@ -14,6 +14,7 @@ public class CustomGravity2 : MonoBehaviour
     public GravityDirection gravDirection;
     private bool cameraFlipOnce = true;
     private GameObject cameraObj;
+    public Vector3 correctUp;
     // Global Gravity doesn't appear in the inspector. Modify it here in the code
     // (or via scripting) to define a different default gravity for all objects.
 
@@ -34,6 +35,8 @@ public class CustomGravity2 : MonoBehaviour
     void FixedUpdate()
     {
         GravityTest();
+
+       
         if (gravDirection == GravityDirection.Down)
         {
             // Vector3 gravity = globalGravity * gravityScale * Vector3.up;
@@ -47,6 +50,8 @@ public class CustomGravity2 : MonoBehaviour
 
                 //transform.rotation = Quaternion.Euler(transform.rotation.eulerAngles.x, transform.rotation.eulerAngles.y, 0);
                 // transform.Rotate(0, 0, 180);
+
+              //  correctUp = transform.up;
                 cameraFlipOnce = false;
             }
 
@@ -62,6 +67,8 @@ public class CustomGravity2 : MonoBehaviour
                 transform.localEulerAngles = new Vector3(transform.rotation.eulerAngles.x, transform.rotation.eulerAngles.y, 180);
 
                 cameraFlipOnce = false;
+               // correctUp = //transform.up;
+
             }
 
         }
@@ -76,6 +83,8 @@ public class CustomGravity2 : MonoBehaviour
 
                 transform.localEulerAngles = new Vector3(-90, transform.rotation.eulerAngles.y, transform.rotation.eulerAngles.z);
                 cameraFlipOnce = false;
+            //    correctUp = transform.up;
+
             }
         }
         else if (gravDirection == GravityDirection.Back)
@@ -90,6 +99,8 @@ public class CustomGravity2 : MonoBehaviour
 
                 transform.localEulerAngles = new Vector3(90, transform.rotation.eulerAngles.y, transform.rotation.eulerAngles.z);
                 cameraFlipOnce = false;
+                correctUp = transform.up;
+
             }
         }
         else if (gravDirection == GravityDirection.Right)
@@ -102,6 +113,8 @@ public class CustomGravity2 : MonoBehaviour
             {
                 transform.localEulerAngles = new Vector3(transform.rotation.eulerAngles.x, transform.rotation.eulerAngles.y, 90);
                 cameraFlipOnce = false;
+               // correctUp = transform.up;
+
             }
         }
         else if (gravDirection == GravityDirection.Left)
@@ -117,10 +130,12 @@ public class CustomGravity2 : MonoBehaviour
                
                 transform.localEulerAngles = new Vector3(transform.rotation.eulerAngles.x, transform.rotation.eulerAngles.y, -90);
                 cameraFlipOnce = false;
+           //     correctUp = transform.up;
+
             }
         }
 
-
+       // transform.up = correctUp;
 
     }
 

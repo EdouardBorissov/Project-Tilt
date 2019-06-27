@@ -30,35 +30,7 @@ public class YoinkedPlayerMove : MonoBehaviour
         {
             Vector3 targetVelocity = new Vector3(0,0,0);
             // Calculate how fast we should be moving
-           /* if (playerGravity.gravDirection == CustomGravity2.GravityDirection.Down)
-            {
-                targetVelocity = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
-            }
-            else if (playerGravity.gravDirection == CustomGravity2.GravityDirection.Up)
-            {
-                targetVelocity = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
-            }
-            else if(playerGravity.gravDirection == CustomGravity2.GravityDirection.Left)
-            {
-                targetVelocity = new Vector3(0, Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
-            }
-            else if(playerGravity.gravDirection == CustomGravity2.GravityDirection.Right)
-            {
-                targetVelocity = new Vector3(0, Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
-            }
-            else if(playerGravity.gravDirection == CustomGravity2.GravityDirection.Forward)
-            {
-                targetVelocity = new Vector3(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"), 0);
-            }
-            else if(playerGravity.gravDirection == CustomGravity2.GravityDirection.Back)
-            {
-                targetVelocity = new Vector3(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"), 0);
-            }
-            else
-            {
-                Debug.Log("Custom Gravity has not been set!");
-                targetVelocity = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
-            }*/
+
             targetVelocity = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
 
             targetVelocity = transform.TransformDirection(targetVelocity);
@@ -77,7 +49,7 @@ public class YoinkedPlayerMove : MonoBehaviour
             if (canJump && Input.GetButton("Jump"))
             {
                 // playerRigidbody.velocity = new Vector3(velocity.x, CalculateJumpVerticalSpeed(), velocity.z);
-                playerRigidbody.AddRelativeForce(velocity.x, CalculateJumpVerticalSpeed(), velocity.z, ForceMode.Impulse);
+                playerRigidbody.AddRelativeForce(0, CalculateJumpVerticalSpeed(), 0, ForceMode.Impulse);
             }
         }
 

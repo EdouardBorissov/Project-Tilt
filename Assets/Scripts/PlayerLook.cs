@@ -47,15 +47,15 @@ public class PlayerLook : MonoBehaviour
         {
             yLookClamp = 90;
             mouseY = 0;
-            ClampYLookToValue(270);
+            //ClampYLookToValue(270);
         }
         else if(yLookClamp < -90)
         {
             yLookClamp = -90;
             mouseY = 0;
-            ClampYLookToValue(90);
+            //ClampYLookToValue(90);
         }
-        //ClampZLookToValue(0);
+     
 
         transform.Rotate(Vector3.left * mouseY);
         playerBody.gameObject.transform.Rotate(Vector3.up * mouseX);
